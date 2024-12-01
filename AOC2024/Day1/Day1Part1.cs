@@ -12,6 +12,7 @@ namespace AOC2024.Day1
         public object Parse()
         {
             List<string> lists = RawInput
+                .Replace("\r","")
                 .Split('\n')
                 .ToList();
 
@@ -21,7 +22,7 @@ namespace AOC2024.Day1
             foreach (string pair in lists)
             {
                 List<int> ids = pair
-                    .Split(new string[] { "   " }, StringSplitOptions.None)
+                    .Split(new string[] { "   " }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToList();
                 listOne.Add(ids[0]);

@@ -42,7 +42,18 @@ namespace AOC2024
 
                 Console.Write("Debug? (Y/n): ");
                 uin = Console.ReadLine().ToUpper();
-                if (uin == "Y") selectedDay.Debug = true; else selectedDay.Debug = false;
+                if (uin == "Y")
+                {
+                    selectedDay.Debug = true;
+                    selectedDay.PartOne.Debug = true;
+                    selectedDay.PartTwo.Debug = true;
+                }
+                else
+                {
+                    selectedDay.Debug = false;
+                    selectedDay.PartOne.Debug = false;
+                    selectedDay.PartTwo.Debug = false;
+                }
 
                 Console.Write("Run part (1/2): ");
                 uin = Console.ReadLine();

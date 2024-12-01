@@ -25,7 +25,7 @@ namespace AOC2024
                 Console.WriteLine("Day listing:");
                 foreach (var day in days)
                 {
-                    Console.WriteLine($"\t{day.Name} | {(day.PartOne.Solved ? "*" : "-")} {(day.PartTwo.Solved ? "*" : "-")}");
+                    Console.WriteLine($"\t{day.Name}{new string(' ', 30-day.Name.Length)}| {(day.PartOne.Solved ? "*" : "-")} {(day.PartTwo.Solved ? "*" : "-")}");
                 }
 
                 Console.Write($"\n{(err != "" ? $"Input Error: {err}!\n" : "")}Select Day: ");

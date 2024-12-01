@@ -36,6 +36,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Day2\Day2.cs" />
+    <Compile Include="Day2\Day2Part1.cs" />
+    <Compile Include="Day2\Day2Part2.cs" />
     <Compile Include="Day1\Day1.cs" />
     <Compile Include="Day1\Day1Part2.cs" />
     <Compile Include="Day1\Day1Part1.cs" />
@@ -44,6 +47,8 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Day2\realInput.txt" />
+    <Content Include="Day2\testInput.txt" />
     <Content Include="Day1\realInput.txt" />
     <Content Include="Day1\testInput.txt" />
   </ItemGroup>

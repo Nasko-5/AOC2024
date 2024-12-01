@@ -4,13 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AOC2024.Day1;
 
-namespace AOC2024.Day1
+namespace AOC2024.Day2
 {
-    internal class Day1 : IDay
+    internal class Day2 : IDay
     {
-        public string Name => "Day 1: Historian Hysteria";
+        public string Name => "Day 2: ???";
         public int Stars { get { return (PartOne.Solved ? 1 : 0) + (PartTwo.Solved ? 1 : 0); } }
         public bool Completed { get { return Stars == 2; } }
         public string Path { get { return $@"{ComputerPath}{this.GetType().Name}/";  } }
@@ -45,12 +44,12 @@ namespace AOC2024.Day1
             }
         }
 
-        public Day1 (bool debug, string computerPath)
+        public Day2 (bool debug, string computerPath)
         {
             Debug = debug;
             ComputerPath = ComputerPath;
-            PartOne = new Day1Part1(debug, Path);
-            PartTwo = new Day1Part2(debug, Path);
+            PartOne = new Day2Part1(debug, Path);
+            PartTwo = new Day2Part2(debug, Path);
         }
     }
 }

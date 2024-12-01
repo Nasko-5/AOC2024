@@ -10,6 +10,7 @@ namespace AOC2024
     public class Program
     {
         public static bool debug = true;
+        public static string computerPath = @"D:/My stuff/.programming/csharp/AOC2024/AOC2024/"; // make sure it ends with a slash
         public static void Main()
         {
             var days = GetDays();
@@ -39,6 +40,7 @@ namespace AOC2024
                 printBanner();
 
                 IDay selectedDay = days[dayNumber - 1];
+                selectedDay.ComputerPath = computerPath;
 
                 Console.Write("Debug? (Y/n): ");
                 uin = Console.ReadLine().ToUpper();
@@ -65,8 +67,16 @@ namespace AOC2024
                 try { partNumber = int.Parse(uin); }
                 catch { err = $"Bad Input"; continue; }
 
-                if (partNumber == 1) selectedDay.RunPartOne();
-                if (partNumber == 2) selectedDay.RunPartTwo();
+                if (partNumber == 1)
+                {
+                    selectedDay.PartOne.Path = selectedDay.Path;
+                    selectedDay.RunPartOne();
+                }
+                if (partNumber == 2)
+                {
+                    selectedDay.PartTwo.Path = selectedDay.Path;
+                    selectedDay.RunPartTwo();
+                }
                 
 
                 Console.Write("Press any key to continue...");
@@ -89,7 +99,7 @@ namespace AOC2024
                 var constructor = type.GetConstructors().FirstOrDefault();
                 if (constructor != null)
                 {
-                    return (IDay)constructor.Invoke(new object[] { debug });
+                    return (IDay)constructor.Invoke(new object[] { debug, computerPath });
                 }
                 return null;
             })

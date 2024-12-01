@@ -65,7 +65,7 @@ namespace AOC2024.Day1
         public int GotAnswer { get; set; }
         public bool Debug { get; set; }
         public string Path { get; set; }
-        public string RawInput { get { return File.ReadAllText(Path + (Debug ? "testInput.txt" : "realInput.txt")); } }
+        public string RawInput { get { return File.ReadAllText($@"{Path}{(Debug ? "testInput.txt" : "realInput.txt")}"); } }
         public IDay PartOfDay { get; set; }
         public Day1Part1(bool debug, string path)
         {

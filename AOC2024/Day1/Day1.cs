@@ -12,14 +12,15 @@ namespace AOC2024.Day1
         public string Name => "Day 1: Historian Hysteria";
         public int Stars { get { return (PartOne.Solved ? 1 : 0) + (PartTwo.Solved ? 1 : 0); } }
         public bool Completed { get { return Stars == 2; } }
-        public string Path { get { return $"D:/My stuff/.programming/csharp/AOC2024/AOC2024/{this.GetType().Name}/";  } }
+        public string Path { get { return $@"{ComputerPath}{this.GetType().Name}/";  } }
+        public string ComputerPath { get; set; }
         public IPart PartOne { get; set; }
         public IPart PartTwo { get; set; }
         public bool Debug { get; set; }
 
         public void RunPartOne()
         {
-            string sep = new string('*', 40);
+            string sep = new string('*', Console.WindowWidth);
             try
             {
                 PartOne.Solve();
@@ -32,7 +33,7 @@ namespace AOC2024.Day1
 
         public void RunPartTwo()
         {
-            string sep = new string('*', 40);
+            string sep = new string('*', Console.WindowWidth);
             try
             {
                 PartTwo.Solve();
@@ -43,9 +44,10 @@ namespace AOC2024.Day1
             }
         }
 
-        public Day1 (bool debug)
+        public Day1 (bool debug, string computerPath)
         {
             Debug = debug;
+            ComputerPath = ComputerPath;
             PartOne = new Day1Part1(debug, Path);
             PartTwo = new Day1Part2(debug, Path);
         }

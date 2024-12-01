@@ -13,6 +13,7 @@ namespace AOC2024
         bool Completed { get; }
         bool Debug { get; set; }
         string Path { get; }
+        string ComputerPath { get; set; }
         IPart PartOne { get; }
         IPart PartTwo { get; }
 

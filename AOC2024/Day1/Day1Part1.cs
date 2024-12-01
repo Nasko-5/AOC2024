@@ -12,6 +12,7 @@ namespace AOC2024.Day1
         public object Parse()
         {
             List<string> lists = RawInput
+                .Replace("\r","")
                 .Split('\n')
                 .ToList();
 
@@ -21,7 +22,7 @@ namespace AOC2024.Day1
             foreach (string pair in lists)
             {
                 List<int> ids = pair
-                    .Split(new string[] { "   " }, StringSplitOptions.None)
+                    .Split(new string[] { "   " }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToList();
                 listOne.Add(ids[0]);
@@ -60,7 +61,7 @@ namespace AOC2024.Day1
         }
 
         public bool Solved { get { return CorrectAnswer == GotAnswer; } }
-        public int CorrectAnswer => int.MinValue;
+        public int CorrectAnswer => 2000468;
         public int GotAnswer { get; set; }
         public bool Debug { get; set; }
         public string Path { get; set; }

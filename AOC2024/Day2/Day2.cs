@@ -9,7 +9,7 @@ namespace AOC2024.Day2
 {
     internal class Day2 : IDay
     {
-        public string Name => "Day 2: ???";
+        public string Name => "Day 2: Red-Nosed Reports";
         public int Stars { get { return (PartOne.Solved ? 1 : 0) + (PartTwo.Solved ? 1 : 0); } }
         public bool Completed { get { return Stars == 2; } }
         public string Path { get { return $@"{ComputerPath}{this.GetType().Name}/";  } }

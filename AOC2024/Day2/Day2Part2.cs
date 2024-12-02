@@ -32,9 +32,21 @@ namespace AOC2024.Day2
             {
                 List<int> tempReport = reports[reportIndex];
 
-                Console.WriteLine($"Testing report {reportIndex} ({string.Join(" ", tempReport)})");
-                
-                for (int level = 0; level < tempReport.Count; level++)
+                Console.WriteLine($"Testing report {reportIndex}/{reports.Length} ({string.Join(" ", tempReport)})");
+
+                Console.Write($"   Is safe as is?");
+                if (reportIsSafe(tempReport))
+                {
+                    Console.WriteLine(" | Safe!");
+                    safeReports++;
+                    Console.WriteLine($"Safe reports so far: {safeReports}");
+                    if (Debug) Console.ReadLine();
+                    continue;
+                }
+
+                Console.WriteLine(" | Not Safe.");
+
+                for (int level = 0; level < tempReport.Count+1; level++)
                 {
                     string levelString = $"{level}{(level == 1 ? "st" : level == 2 ? "nd" : level == 3 ? "rd" : "th")}";
                     tempReport = new List<int>(reports[reportIndex]);
@@ -49,12 +61,13 @@ namespace AOC2024.Day2
                     {
                         Console.WriteLine(" | Not Safe.");
                     }
-                    
                 }
-                //Console.ReadLine();
+               
+                Console.WriteLine($"Safe reports so far: {safeReports}");
+                if(Debug)Console.ReadLine();
             }
 
-            Console.WriteLine($"\nSafe reports: {safeReports}");
+            Console.WriteLine($"\nFinal safe reports: {safeReports}");
 
             GotAnswer = safeReports;
         }
@@ -67,14 +80,17 @@ namespace AOC2024.Day2
             int oldSign = Math.Sign(report[0] - report[1]);
             bool isSafe = false;
 
+            Console.Write(" | ");
             for (int level = 0; level < report.Count - 1; level++)
             {
                 delta = report[level] - report[level + 1];
                 sign = Math.Sign(delta);
                 delta = Math.Abs(delta);
+                bool inRange = delta < 1 || delta > 3;
+                bool directionChanged = sign != oldSign;
 
-                //Console.Write($"   delta = {delta} | ");
-                if (delta < 1 || delta > 3 || sign != oldSign)
+                Console.Write($"{delta}{(!inRange ? "*" : "-")}{(sign == 1 ? "v" : "^")} ");
+                if (inRange || directionChanged)
                 {
                     isSafe = false;
                     break;
@@ -83,12 +99,12 @@ namespace AOC2024.Day2
 
                 oldSign = sign;
             }
-
+            //Console.WriteLine();
             return isSafe;
         }
 
         public bool Solved { get { return CorrectAnswer == GotAnswer; } }
-        public int CorrectAnswer => 18567089;
+        public int CorrectAnswer => 337;
         public int GotAnswer { get; set; }
         public bool Debug { get; set; }
         public string Path { get; set; }

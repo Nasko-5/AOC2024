@@ -10,7 +10,7 @@ namespace AOC2024
     public class Program
     {
         public static bool debug = true;
-        public static string computerPath = @"D:/My stuff/.programming/csharp/AOC2024/AOC2024/"; // make sure it ends with a slash
+        public static string computerPath = @"D:/My stuff/.programming/csharp/AOC2024/AOC20244/"; // make sure it ends with a slash
         public static void Main()
         {
             var days = GetDays();

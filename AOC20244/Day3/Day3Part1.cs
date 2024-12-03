@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace AOC2024.Day2
 {
@@ -12,57 +6,37 @@ namespace AOC2024.Day2
     {
         public object Parse()
         {
-            var reports = RawInput
-                .Replace("\r", "")
-                .Split('\n')
-                .Select(a => a.Split(' ').Select(int.Parse).ToArray())
-                .ToArray();
+            Regex mulRegex = new(@"mul\((\d{1,3},\d{1,3})\)");
 
-            return reports;
+            var matches = mulRegex.Matches(RawInput);
+            (int, int)[] parsed = new (int, int)[matches.Count];
+
+            for (int match = 0; match < matches.Count; match++)
+            {
+                var toMult = matches[match].Groups[1].Value
+                    .Split(',')
+                    .Select(int.Parse)
+                    .ToArray();
+
+                parsed[match] = (toMult[0], toMult[1]);
+            }
+
+            return parsed;
         }
 
         public void Solve()
         {
-            int[][] reports = (int[][])Parse();
-            bool[] reportSafety = new bool[reports.Length];
+            (int, int)[] parsed = ((int, int)[])Parse();
+            Console.WriteLine($"\nExtracted:\n   {string.Join(" ", parsed.Select(a => $"mul({a.Item1},{a.Item2})").ToArray())}\n");
 
-            Console.WriteLine();
-            for (int reportIndex = 0; reportIndex < reports.Length; reportIndex++)
+            Console.WriteLine($"Calculate:\n   {string.Join("+", parsed.Select(a => $"({a.Item1}*{a.Item2})").ToArray())}\n");
+            int sum = 0;
+            foreach (var pair in  parsed)
             {
-                int[] report = reports[reportIndex];
-
-                int delta = 0;
-                int sign = 0;
-                int oldSign = Math.Sign(report[0] - report[1]);
-
-                Console.WriteLine($"Report {reportIndex} ({string.Join(" ", report)})");
-                for (int i = 0; i < report.Length - 1; i++)
-                {
-                    delta = report[i] - report[i + 1];
-                    sign = Math.Sign(delta);
-                    delta = Math.Abs(delta);
-
-                    Console.Write($"   delta = {delta} | ");
-                    if (delta < 1 || delta > 3 || sign != oldSign)
-                    {
-                        reportSafety[reportIndex] = false;
-                        Console.WriteLine($"Unsafe | Delta is less than one or greater than three, and it is not linear");
-                        break;
-                    }
-                    else reportSafety[reportIndex] = true;
-                    Console.WriteLine(    $"Safe   | Delta is greater than one and less than three, and it is linear");
-
-                    oldSign = sign;
-
-                }
-                //Console.Write($"{(reportSafety[reportIndex] ? "Safe  " : "Unsafe")} | {string.Join(" ", report)}\r");
-                Console.WriteLine();
+                sum += pair.Item1 * pair.Item2;
             }
-
-            int safeReports = reportSafety.Count(a => a == true);
-            Console.WriteLine($"\nSafe reports: {safeReports}");
-
-            GotAnswer = safeReports;
+            Console.WriteLine($"Answer = {sum}\n");
+            GotAnswer = sum;
         }
 
         public bool Solved { get { return CorrectAnswer == GotAnswer; } }

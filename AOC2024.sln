@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOC20244", "AOC20244\AOC20244.csproj", "{2E94844C-A095-4F49-9D19-3788AA56FB2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOC2024", "AOC20244\AOC2024.csproj", "{2E94844C-A095-4F49-9D19-3788AA56FB2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -62,7 +62,7 @@ namespace AOC2024.Day2
 
 
         public bool Solved { get { return CorrectAnswer == GotAnswer; } }
-        public int CorrectAnswer => 337;
+        public int CorrectAnswer => 72948684;
         public int GotAnswer { get; set; }
         public bool Debug { get; set; }
         public string Path { get; set; }

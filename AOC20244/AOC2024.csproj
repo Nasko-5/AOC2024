@@ -12,6 +12,8 @@
     <None Remove="Day1\testInput.txt" />
     <None Remove="Day2\realInput.txt" />
     <None Remove="Day2\testInput.txt" />
+    <None Remove="Day4\realInput.txt" />
+    <None Remove="Day4\testInput.txt" />
     <None Remove="Day3\realInput.txt" />
     <None Remove="Day3\testInput.txt" />
   </ItemGroup>
@@ -21,6 +23,8 @@
     <Content Include="Day1\testInput.txt" />
     <Content Include="Day2\realInput.txt" />
     <Content Include="Day2\testInput.txt" />
+    <Content Include="Day4\realInput.txt" />
+    <Content Include="Day4\testInput.txt" />
     <Content Include="Day3\realInput.txt" />
     <Content Include="Day3\testInput.txt" />
   </ItemGroup>

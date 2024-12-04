@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AOC2024.Day2
+namespace AOC2024.Day3
 {
     internal class Day3Part1 : IPart
     {

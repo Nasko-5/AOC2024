@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AOC2024.Day2
+namespace AOC2024.Day3
 {
     internal class Day3Part2 : IPart
     {
@@ -57,9 +57,6 @@ namespace AOC2024.Day2
             Console.WriteLine($"\nAnswer = {sum}\n");
             GotAnswer = sum;
         }
-
-
-
 
         public bool Solved { get { return CorrectAnswer == GotAnswer; } }
         public int CorrectAnswer => 72948684;

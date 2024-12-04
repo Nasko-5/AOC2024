@@ -205,101 +205,168 @@ namespace AOC2024
                     .ToList();
         }
     
-        // DIAGONAL
-
-        public static T[] GetDiagonalF(T[,] matrix)
+        // DIAGONAL | F - Forward | B - Backward | C - Center | RL - Right to Left | LR - Left to Right |
+        public static T[,] GetDiagonalFRL(T[,] matrix, int x, int y, int size)
         {
+            T[,] dia = new T[size, size];
 
+            for (int i = 0; i < size; i++)
+            {
+                if(validIndex(matrix,x+i,y+i)) dia[i,i] = matrix[x+i, y+i];
+            }
+
+            return dia;
+        }
+        public static T[,] GetDiagonalFLR(T[,] matrix, int x, int y, int size)
+        {
+            T[,] dia = new T[size, size];
+
+            for (int i = 0; i < size; i++)
+            {
+                if (validIndex(matrix, x + size - i, y + i)) dia[i, i] = matrix[x + size - i, y + i];
+            }
+
+            return dia;
+        }
+        
+        public static T[,] GetDiagonalBRL(T[,] matrix, int x, int y, int size)
+        {
+            T[,] dia = new T[size, size];
+
+            for (int i = size; i > 0; i--)
+            {
+                if (validIndex(matrix, x + i, y + i)) dia[i, i] = matrix[x + i, y + i];
+            }
+
+            return dia;
+        }
+        public static T[,] GetDiagonalBLR(T[,] matrix, int x, int y, int size)
+        {
+            T[,] dia = new T[size, size];
+
+            for (int i = size; i > 0; i--)
+            {
+                if (validIndex(matrix, x + size - i, y + i)) dia[i, i] = matrix[x + size - i, y + i];
+            }
+
+            return dia;
+        }
+     
+        public static T[,] GetDiagonalCRL(T[,] matrix, int x, int y, int size)
+        {
+            T[,] dia = new T[(size * 2) + 1, (size * 2) + 1];
+
+            int start = size * 2;
+            int nx = x-start, ny = y-start;
+            int dx = 0;
+
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                if (validIndex(matrix, nx + i, ny + i)) dia[dx,dx] = matrix[nx + i, ny + i];
+                dx++;
+            }
+
+            return dia;
+        }
+        // not sure how to implement a left to right diagonal starting from a center point...
+        public static T[,] GetDiagonalCLR(T[,] matrix, int x, int y, int size)
+        {
+            T[,] dia = new T[(size * 2) + 1, (size * 2) + 1];
+
+            int start = size * 2;
+            int nx = x - start, ny = y - start;
+            int dx = 0;
+
+            for (int i = 0; i < (size * 2) + 1; i++)             
+            {                                                   // ?????? 
+                if (validIndex(matrix, (nx + size)-i, ny + i)) dia[dx, dx] = matrix[nx + i, ny + i];
+                dx++;
+            }
+
+            return dia;
+        }
+
+        public static T[] GetDiagonalFRL1D(T[,] matrix, int x, int y, int size)
+        {
+            T[] flatDia = new T[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                if (validIndex(matrix, x + i, y + i)) flatDia[i] = matrix[x + i, y + i];
+            }
+
+            return flatDia;
+        }
+        public static T[] GetDiagonalFLR1D(T[,] matrix, int x, int y, int size)
+        {
+            T[] flatDia = new T[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                if (validIndex(matrix, (x + size)-i, y + i)) flatDia[i] = matrix[(x + size) - i, y + i];
+            }
+
+            return flatDia;
+        }
+        
+        public static T[] GetDiagonalBRL1D(T[,] matrix, int x, int y, int size)
+        {
+            T[] flatDia = new T[size];
+
+            for (int i = size; i > 0; i--)
+            {
+                if (validIndex(matrix, x + i, y + i)) flatDia[i] = matrix[x + i, y + i];
+            }
+
+            return flatDia;
+        }
+        public static T[] GetDiagonalBLR1D(T[,] matrix, int x, int y, int size)
+        {
+            T[] flatDia = new T[size];
+
+            for (int i = size; i > 0; i--)
+            {
+                if (validIndex(matrix, (x+size)-i, y + i)) flatDia[i] = matrix[(x + size) - i, y + i];
+            }
+
+            return flatDia;
+        }
+        
+        public static T[] GetDiagonalCRL1D(T[,] matrix, int x, int y, int size)
+        {
+            T[] dia = new T[(size * 2) + 1];
+
+            int start = size * 2;
+            int nx = x - start, ny = y - start;
+            int dx = 0;
+
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                if (validIndex(matrix, nx + i, ny + i)) dia[dx] = matrix[nx + i, ny + i];
+                dx++;
+            }
+
+            return dia;
+        }
+        // not sure how to implement a left to right diagonal starting from a center point...
+        public static T[] GetDiagonalCLR1D(T[,] matrix, int x, int y, int size)
+        {
+            T[] dia = new T[(size * 2) + 1];
+
+            int start = size * 2;
+            int nx = x - start, ny = y - start;
+            int dx = 0;
+
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                if (validIndex(matrix, (nx + size)-i, ny + i)) dia[dx] = matrix[nx + i, ny + i];
+                dx++;
+            }
+
+            return dia;
         }
     }
 
-        // Needed functions:
 
-        // get neighbors  (with adjustable size)
-        //
-        // (no wrap)
-        // GetNeighbors(IEnumerable<IEnumerable<T>> grid, int x, int y, int size) -> IEnumerable<IEnumerable<T>>
-        // GetNeighbors(IEnumerable<IEnumerable<T>> grid, int x, int y, int size) -> IEnumerable<T>
-        // GetNeighbors(IEnumerable<T> grid, int x, int y, int size) -> IEnumerable<T>
-        // (wrap)
-        // GetNeighborsWrap(IEnumerable<IEnumerable<T>> grid, int x, int y, int size) -> IEnumerable<IEnumerable<T>>
-        // GetNeighborsWrap(IEnumerable<IEnumerable<T>> grid, int x, int y, int size) -> IEnumerable<T>
-        // GetNeighborsWrap(IEnumerable<T> grid, int x, int y, int size) -> IEnumerable<T>
-
-        // ex. grid     2d          1d      2d big
-        // a b c d e  (3,4 1)     (4,3 1)    (2,3 2)    (wrapping)
-        // f g h i j   . . .                . . . . .   e a b c d
-        // k l m n o   . o .       . o .    . . . . .   j f g h i
-        // p q r s t   . . .         v      . . o . . > o k l m n or {e,a,b,c,d,j,f,g,h,i,o,k ... }
-        // u v w x y     v         {m,n,o}  . . . . .   t p q r s
-        //             b c d                . . . . .   y u v w x
-        //             g h i                    v
-        //             l m n                . a b c d
-        //               v                  . f g h i
-        //      {b,c,d,g,h,i,l,m,n}         . k l m n or {.,a,b,c,d,.,f,g,h,i ... }
-        //                                  . p q r s
-        //                                  . u v w x
-        //          a b c d e f g           (no wrap)
-        //            . . o . .
-        //                v
-        //           {b,c,d,e,f}
-        //
-
-        // index 2d as 1d or 1d as 2d
-
-        //  2d as 1d     1d as 2d
-        //    (4)          (3,2)
-        //   . . .     
-        //   o . .   . . . . . o . . .
-        //   . . .
-
-        // get diagonal from point (backwards/forwards) or from center with adjustable size
-        // returns another 2d enumarable or a 1d enumarable (overrides)
-
-        // GetDiagonalFromPointForwards(int x, int y, int length) -> IEnumerable<IEnumerable<T>>
-        // GetDiagonalFromPointBackwards(int x, int y, int length) -> IEnumerable<IEnumerable<T>>
-        // GetDiagonalFromPointCenter(int x, int , int length) -> IEnumerable<IEnumerable<T>>
-        // GetDiagonalFromPointForwards(int x, int y, int length) -> IEnumerable<T>
-        // GetDiagonalFromPointBackwards(int x, int y, int length) -> IEnumerable<T>
-        // GetDiagonalFromPointCenter(int x, int , int length) -> IEnumerable<T>
-
-        //  ex. grid     dia from point forwards                dia from point backwards
-        //  a b c d e    (1,1) size 3                           (5,5) size 4
-        //  f g h i j    . . . . .                              . b . . .         b . . . 
-        //  k l m n o    . * . . . returns  g . .               . . h . . returns . h . .
-        //  p q r s t    . . m . . ------>  . m . or {g,m,s}    . . . n . ------> . . n . or {t.,.,.,.,n,.,.,.,h,.,.,.,b,.,.,.}
-        //               . . . s .          . . s               . . . . *         . . . t
-        //
-        //               get dia from center
-        //               (3,3) size 1
-        //               . . . . .
-        //               . g . . . returns  g . .
-        //               . . * . . ------>  . m . or {g,.,.,.,m,.,.,.,s}
-        //               . . . s .          . . s
-
-        // get row or column (from/to index optional)
-
-
-
-        //               
-        //               get row    get row    get row    get row
-        // ex. grid      (2)        (3 1-4)    (1 3-5)    (4 2-4)
-        // a b c d e     . . . . .  . . . . .  . . c d e  . . . . .
-        // f g h i j     f g h i j  . . . . .  . . . . .  . . . . .
-        // k l m n o     . . . . .  k l m n .  . . . . .  . . . . .
-        // p q r s t   . . . . . .  . . . . .  . . . . .  . q r s .
-        //                   v          v          v          v
-        //              {f,g,h,i,j} {k,l,m,n}   {c,d,e}    {q,r,s}
-        //
-        //    get col    get col    get col    get col
-        //    (2)        (3 1-2)    (1 2-4)    (5 2-3)
-        //    . b . . .  . . c . .  . . . . .  . . . . .
-        //    . g . . .  . . h . .  f . . . .  . . . . j
-        //    . l . . .  . . . . .  k . . . .  . . . . o 
-        //    . q . . .  . . . . .  p . . . .  . . . . .
-        //        v          v          v          v
-        //    {b,g,l,q}    {c,h}     {f,k,p}     {j,o} (mama so fat)
-        //
-
-    }
 }
+

@@ -24,25 +24,25 @@ namespace AOC2024
         public static bool validIndex<T>(List<List<T>> matrix, int x, int y) 
         {
             if (x < 0 || y < 0) { return false; }
-            else if (y > matrix.Count() || x > matrix.First().Count()) { return false; }
+            else if (y >= matrix.Count() || x >= matrix[y].Count()) { return false; }
             return true;
         }
         public static bool validIndex<T>(T[,] matrix, int x, int y)
         {
             if (x < 0 || y < 0) { return false; }
-            else if (y > matrix.GetLength(0) || x > matrix.GetLength(1)) { return false; }
+            else if (y >= matrix.GetLength(0) || x >= matrix.GetLength(1)) { return false; }
             return true;
         }
         public static bool validIndex<T>(List<T> list, int x)
         {
             if (x < 0) { return false; }
-            else if (x > list.Count()) { return false; }
+            else if (x >= list.Count()) { return false; }
             return true;
         }
         public static bool validIndex<T>(T[] array, int x)
         {
             if (x < 0 ) { return false; }
-            else if (x > array.Length) { return false; }
+            else if (x >= array.Length) { return false; }
             return true;
         }
 
@@ -73,7 +73,7 @@ namespace AOC2024
             {
                 for (int blockx = x - size; blockx < x + size; blockx++)
                 {
-                    if (validIndex(matrix, x, y)) neighbors[nx, ny] = matrix[blocky, blockx];
+                    if (validIndex(matrix, blockx, blocky)) neighbors[nx, ny] = matrix[blocky, blockx];
                     nx++;
                 } ny++;
             }
@@ -182,7 +182,6 @@ namespace AOC2024
                     .ToList();
         }
 
-
         // COLUMN
         public static T[] GetColumn(T[,] matrix, int columnNumber, int from = 0, int to = int.MaxValue)
         {
@@ -228,7 +227,6 @@ namespace AOC2024
 
             return dia;
         }
-        
         public static T[,] GetDiagonalBRL(T[,] matrix, int x, int y, int size)
         {
             T[,] dia = new T[size, size];
@@ -251,7 +249,6 @@ namespace AOC2024
 
             return dia;
         }
-     
         public static T[,] GetDiagonalCRL(T[,] matrix, int x, int y, int size)
         {
             T[,] dia = new T[(size * 2) + 1, (size * 2) + 1];
@@ -268,24 +265,17 @@ namespace AOC2024
 
             return dia;
         }
-        // not sure how to implement a left to right diagonal starting from a center point...
         public static T[,] GetDiagonalCLR(T[,] matrix, int x, int y, int size)
         {
             T[,] dia = new T[(size * 2) + 1, (size * 2) + 1];
-
-            int start = size * 2;
-            int nx = x - start, ny = y - start;
-            int dx = 0;
-
-            for (int i = 0; i < (size * 2) + 1; i++)             
-            {                                                   // ?????? 
-                if (validIndex(matrix, (nx + size)-i, ny + i)) dia[dx, dx] = matrix[nx + i, ny + i];
-                dx++;
+            int startX = x + size, startY = y - size;
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                int currentX = startX - i, currentY = startY + i;
+                if (validIndex(matrix, currentX, currentY)) dia[i, i] = matrix[currentY, currentX];
             }
-
             return dia;
         }
-
         public static T[] GetDiagonalFRL1D(T[,] matrix, int x, int y, int size)
         {
             T[] flatDia = new T[size];
@@ -308,7 +298,6 @@ namespace AOC2024
 
             return flatDia;
         }
-        
         public static T[] GetDiagonalBRL1D(T[,] matrix, int x, int y, int size)
         {
             T[] flatDia = new T[size];
@@ -331,7 +320,6 @@ namespace AOC2024
 
             return flatDia;
         }
-        
         public static T[] GetDiagonalCRL1D(T[,] matrix, int x, int y, int size)
         {
             T[] dia = new T[(size * 2) + 1];
@@ -348,25 +336,20 @@ namespace AOC2024
 
             return dia;
         }
-        // not sure how to implement a left to right diagonal starting from a center point...
         public static T[] GetDiagonalCLR1D(T[,] matrix, int x, int y, int size)
         {
             T[] dia = new T[(size * 2) + 1];
-
-            int start = size * 2;
-            int nx = x - start, ny = y - start;
-            int dx = 0;
-
+            int startX = x + size, startY = y - size;
             for (int i = 0; i < (size * 2) + 1; i++)
             {
-                if (validIndex(matrix, (nx + size)-i, ny + i)) dia[dx] = matrix[nx + i, ny + i];
-                dx++;
+                int currentX = startX - i, currentY = startY + i;
+                if (validIndex(matrix, currentX, currentY)) dia[i] = matrix[currentY, currentX];
+                
             }
-
             return dia;
         }
     }
-
-
 }
+
+
 

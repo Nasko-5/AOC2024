@@ -344,12 +344,193 @@ namespace AOC2024
             {
                 int currentX = startX - i, currentY = startY + i;
                 if (validIndex(matrix, currentX, currentY)) dia[i] = matrix[currentY, currentX];
-                
             }
             return dia;
         }
+        public static List<List<T>> GetDiagonalFRL(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<List<T>> dia = new List<List<T>>();
+
+            for (int i = 0; i < size; i++)
+            {
+                dia.Add(new List<T>());
+                if (validIndex(matrix, x + i, y + i))
+                    dia[i].Add(matrix[y + i][x + i]);
+                else
+                    dia[i].Add(default);
+            }
+
+            return dia;
+        }
+        public static List<List<T>> GetDiagonalFLR(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<List<T>> dia = new List<List<T>>();
+
+            for (int i = 0; i < size; i++)
+            {
+                dia.Add(new List<T>());
+                if (validIndex(matrix, x + size - i, y + i))
+                    dia[i].Add(matrix[y + i][x + size - i]);
+                else
+                    dia[i].Add(default);
+            }
+
+            return dia;
+        }
+        public static List<List<T>> GetDiagonalBRL(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<List<T>> dia = new List<List<T>>();
+
+            for (int i = size; i > 0; i--)
+            {
+                dia.Add(new List<T>());
+                if (validIndex(matrix, x + i, y + i))
+                    dia[size - i].Add(matrix[y + i][x + i]);
+                else
+                    dia[size - i].Add(default);
+            }
+
+            return dia;
+        }
+        public static List<List<T>> GetDiagonalBLR(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<List<T>> dia = new List<List<T>>();
+
+            for (int i = size; i > 0; i--)
+            {
+                dia.Add(new List<T>());
+                if (validIndex(matrix, x + size - i, y + i))
+                    dia[size - i].Add(matrix[y + i][x + size - i]);
+                else
+                    dia[size - i].Add(default);
+            }
+
+            return dia;
+        }
+        public static List<List<T>> GetDiagonalCRL(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<List<T>> dia = new List<List<T>>();
+
+            int start = size * 2;
+            int nx = x - start, ny = y - start;
+
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                dia.Add(new List<T>());
+                if (validIndex(matrix, nx + i, ny + i))
+                    dia[i].Add(matrix[ny + i][nx + i]);
+                else
+                    dia[i].Add(default);
+            }
+
+            return dia;
+        }
+        public static List<List<T>> GetDiagonalCLR(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<List<T>> dia = new List<List<T>>();
+
+            int startX = x + size, startY = y - size;
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                dia.Add(new List<T>());
+                int currentX = startX - i, currentY = startY + i;
+                if (validIndex(matrix, currentX, currentY))
+                    dia[i].Add(matrix[currentY][currentX]);
+                else
+                    dia[i].Add(default);
+            }
+
+            return dia;
+        }
+        public static List<T> GetDiagonalFRL1D(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<T> flatDia = new List<T>();
+
+            for (int i = 0; i < size; i++)
+            {
+                if (validIndex(matrix, x + i, y + i))
+                    flatDia.Add(matrix[y + i][x + i]);
+                else
+                    flatDia.Add(default);
+            }
+
+            return flatDia;
+        }
+        public static List<T> GetDiagonalFLR1D(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<T> flatDia = new List<T>();
+
+            for (int i = 0; i < size; i++)
+            {
+                if (validIndex(matrix, x + size - i, y + i))
+                    flatDia.Add(matrix[y + i][x + size - i]);
+                else
+                    flatDia.Add(default);
+            }
+
+            return flatDia;
+        }
+        public static List<T> GetDiagonalBRL1D(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<T> flatDia = new List<T>();
+
+            for (int i = size; i > 0; i--)
+            {
+                if (validIndex(matrix, x + i, y + i))
+                    flatDia.Add(matrix[y + i][x + i]);
+                else
+                    flatDia.Add(default);
+            }
+
+            return flatDia;
+        }
+        public static List<T> GetDiagonalBLR1D(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<T> flatDia = new List<T>();
+
+            for (int i = size; i > 0; i--)
+            {
+                if (validIndex(matrix, x + size - i, y + i))
+                    flatDia.Add(matrix[y + i][x + size - i]);
+                else
+                    flatDia.Add(default);
+            }
+
+            return flatDia;
+        }
+        public static List<T> GetDiagonalCRL1D(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<T> flatDia = new List<T>();
+
+            int start = size * 2;
+            int nx = x - start, ny = y - start;
+
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                if (validIndex(matrix, nx + i, ny + i))
+                    flatDia.Add(matrix[ny + i][nx + i]);
+                else
+                    flatDia.Add(default);
+            }
+
+            return flatDia;
+        }
+        public static List<T> GetDiagonalCLR1D(List<List<T>> matrix, int x, int y, int size)
+        {
+            List<T> flatDia = new List<T>();
+
+            int startX = x + size, startY = y - size;
+            for (int i = 0; i < (size * 2) + 1; i++)
+            {
+                int currentX = startX - i, currentY = startY + i;
+                if (validIndex(matrix, currentX, currentY))
+                    flatDia.Add(matrix[currentY][currentX]);
+                else
+                    flatDia.Add(default);
+            }
+
+            return flatDia;
+        }
+
     }
 }
-
-
-

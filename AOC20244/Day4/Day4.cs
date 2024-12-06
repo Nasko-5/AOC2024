@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AOC2024.Day4
+﻿namespace AOC2024.Day4
 {
     internal class Day4 : IDay
     {
@@ -21,9 +14,9 @@ namespace AOC2024.Day4
         public void RunPartOne()
         {
             string sep = new string('*', Console.WindowWidth);
+            PartOne.Solve();
             try
             {
-                PartOne.Solve();
             }
             catch (Exception e)
             {

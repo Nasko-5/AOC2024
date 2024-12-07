@@ -68,6 +68,12 @@ namespace AOC2024
             return true;
         }
 
+        public static T Index(T[,] matrix, int x, int y)
+        {
+            if (validIndex(matrix, x, y)) { return matrix[x, y]; }
+            return default;
+        }
+
         // 2D NEIGHBOR
         public static List<List<T>> GetNeighbors<T>(List<List<T>> matrix, int x, int y, int size)
         {

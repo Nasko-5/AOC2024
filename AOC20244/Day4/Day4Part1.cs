@@ -18,38 +18,56 @@ namespace AOC2024.Day4
 
         public void Solve()
         {
-            char[,] m = (char[,])Parse();
-            char[,] neighbors;
+            Console.WriteLine("I got burtn out :(");
+        //    char[,] m = (char[,])Parse();
+        //    char[,] neighbors;
 
-            int count = 0;
-            Console.WriteLine();
-            for (int y = 0; y < m.GetLength(0); y++)
-            {
-                for (int x = 0; x < m.GetLength(1); x++)
-                {
-                    char at = m[y,x];
-                    if (at == 'S')
-                    {
-                        //neighbors = GridHelper<char>.GetNeighbors(m, x, y, 4);
-                        Console.WriteLine($"Checking ({x},{y}):");
-                        Console.WriteLine($"   left:    {string.Join(" ", GridHelper<char>.GetRow(m, y, x - 3, x + 1))}");
-                        Console.WriteLine($"   right:   {string.Join(" ", GridHelper<char>.GetRow(m, y, x, x + 4))}");
-                        Console.WriteLine($"   top:     {string.Join(" ", GridHelper<char>.GetColumn(m, x, y - 3, y + 1))}");
-                        Console.WriteLine($"   bottom:  {string.Join(" ", GridHelper<char>.GetColumn(m, x, y, y + 4))}");
-                        Console.WriteLine($"   lrb dia: {string.Join(" ", GridHelper<char>.GetDiagonalBLR1D(m, x, y, 4))}");
-                        Console.WriteLine($"   rlb dia: {string.Join(" ", GridHelper<char>.GetDiagonalBRL1D(m, x, y, 4))}");
-                        Console.WriteLine($"   lrf dia: {string.Join(" ", GridHelper<char>.GetDiagonalFRL1D(m, x, y, 4))}");
-                        Console.WriteLine($"   rlf dia: {string.Join(" ", GridHelper<char>.GetDiagonalFLR1D(m, x, y, 4))}");
+        //    int count = 0;
+        //    string xmas = "XMAS";
+        //    string samx = "SAMX";
 
-                    }
-                }
-            }
+        //    Console.WriteLine();
 
-            
+        //    for (int y = 0; y < m.GetLength(0); y++)
+        //    {
+        //        for (int x = 0; x < m.GetLength(1); x++)
+        //        {
+        //            char at = m[y, x];
+        //            if (at == 'S')
+        //            {
+        //                string left = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y, x - 1)}{GridHelper<char>.Index(m, y, x - 2)}{GridHelper<char>.Index(m, y, x - 3)}";
+        //                string right = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y, x + 1)}{GridHelper<char>.Index(m, y, x + 2)}{GridHelper<char>.Index(m, y, x + 3)}";
+        //                string top = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y + 1, x)}{GridHelper<char>.Index(m, y + 2, x)}{GridHelper<char>.Index(m, y + 3, x)}";
+        //                string bottom = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y - 1, x)}{GridHelper<char>.Index(m, y - 2, x)}{GridHelper<char>.Index(m, y - 3, x)}";
+        //                string rlbDia = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y - 1, x - 1)}{GridHelper<char>.Index(m, y - 2, x - 2)}{GridHelper<char>.Index(m, y - 3, x - 3)}";
+        //                string lrbDia = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y + 1, x + 1)}{GridHelper<char>.Index(m, y + 2, x + 2)}{GridHelper<char>.Index(m, y + 3, x + 3)}";
+        //                string lrfDia = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y + 1, x - 1)}{GridHelper<char>.Index(m, y + 2, x - 2)}{GridHelper<char>.Index(m, y + 3, x - 3)}";
+        //                string rlfDia = $"{GridHelper<char>.Index(m, y, x)}{GridHelper<char>.Index(m, y + 1, x + 1)}{GridHelper<char>.Index(m, y + 2, x + 2)}{GridHelper<char>.Index(m, y + 3, x + 3)}";
+
+        //                var matchlist = new string[] { left, right, top, bottom, rlbDia, lrbDia, lrfDia, rlfDia };
+        //                int valid = matchlist.Count(a => a == xmas || a == samx);
+
+        //                //neighbors = GridHelper<char>.GetNeighbors(m, x, y, 4);
+        //                Console.WriteLine($"Checking ({x},{y}):");
+        //                Console.WriteLine($"   left:    {left}");
+        //                Console.WriteLine($"   right:   {right}");
+        //                Console.WriteLine($"   top:     {top}");
+        //                Console.WriteLine($"   bottom:  {bottom}");
+        //                Console.WriteLine($"   rlb dia: {rlbDia}");
+        //                Console.WriteLine($"   lrb dia: {lrbDia}");
+        //                Console.WriteLine($"   lrf dia: {lrfDia}");
+        //                Console.WriteLine($"   rlf dia: {rlfDia}");
+        //                Console.WriteLine($"   valid: {valid}");
+        //                count += valid;
+        //            }
+        //        }
+        //    }
+
+        //    Console.WriteLine(count);
         }
 
         public bool Solved { get { return CorrectAnswer == GotAnswer; } }
-        public int CorrectAnswer => 0;
+        public int CorrectAnswer => 4;
         public int GotAnswer { get; set; }
         public bool Debug { get; set; }
         public string Path { get; set; }
